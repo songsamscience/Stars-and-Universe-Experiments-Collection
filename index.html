@@ -33,7 +33,7 @@
   --pink:#FFB7B2; --on-pink:#3A1F1C;
   --hl:rgba(255,183,178,.75);
   --u:#8A3FB0;
-  --u1:#0F6FB8; --u2:#AE6A13; --u3:#5856D6; --u4:#0B8A7C; --u7:#C2336A; --u8:#8A3FB0;
+  --u1:#0F6FB8; --u2:#AE6A13; --u3:#5856D6; --u4:#0B8A7C; --u5:#3F7F1F; --u6:#C23B22; --u7:#C2336A; --u8:#8A3FB0;
   --s1:#0B8A7C; --s2:#0F6FB8; --s3:#5E52C9; --s4:#C4502F; --s5:#A86A0E;
   --proton:#E4574B; --neutron:#9AA8B7; --electron:#0F6FB8;
   --shot-bar:#1A2431;
@@ -50,7 +50,7 @@
     --blue:#6AB2EE; --blue-deep:#CFE6FA;
     --hl:rgba(255,183,178,.32);
     --u:#D1A0F0;
-    --u1:#6AB2EE; --u2:#E6A95E; --u3:#A5A4F5; --u4:#4FCBBB; --u7:#F07AA6; --u8:#D1A0F0;
+    --u1:#6AB2EE; --u2:#E6A95E; --u3:#A5A4F5; --u4:#4FCBBB; --u5:#8FD35E; --u6:#F28B74; --u7:#F07AA6; --u8:#D1A0F0;
     --s1:#4FCBBB; --s2:#6AB2EE; --s3:#A69CF5; --s4:#F28E6E; --s5:#E6B15E;
     --proton:#F07470; --neutron:#7D8C9C; --electron:#6AB2EE;
     --shot-bar:#0A1017;
@@ -67,7 +67,7 @@
   --blue:#6AB2EE; --blue-deep:#CFE6FA;
   --hl:rgba(255,183,178,.32);
   --u:#D1A0F0;
-  --u1:#6AB2EE; --u2:#E6A95E; --u3:#A5A4F5; --u4:#4FCBBB; --u7:#F07AA6; --u8:#D1A0F0;
+  --u1:#6AB2EE; --u2:#E6A95E; --u3:#A5A4F5; --u4:#4FCBBB; --u5:#8FD35E; --u6:#F28B74; --u7:#F07AA6; --u8:#D1A0F0;
   --s1:#4FCBBB; --s2:#6AB2EE; --s3:#A69CF5; --s4:#F28E6E; --s5:#E6B15E;
   --proton:#F07470; --neutron:#7D8C9C; --electron:#6AB2EE;
   --shot-bar:#0A1017;
@@ -92,17 +92,20 @@ img,svg{display:block}
   radial-gradient(700px 420px at 0% 100%,color-mix(in srgb,var(--pink) 30%,transparent),transparent 70%),
   linear-gradient(180deg,var(--bg-2),var(--bg))}
 .topbar{position:relative;z-index:3}
-.topbar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:64px}
+.topbar .wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:4px 8px;padding-top:10px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;white-space:nowrap}
 .brand-mark{width:32px;height:32px;border-radius:10px;background:var(--pink);color:var(--on-pink);display:grid;place-items:center}
 .brand-mark svg{width:20px;height:20px}
-.units{display:flex;gap:4px;margin:0 auto;padding:4px;border-radius:999px;background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.units{grid-column:1/-1;grid-row:2;justify-self:center;max-width:100%;overflow-x:auto;scrollbar-width:none;display:flex;gap:4px;margin:0 0 6px;padding:4px;border-radius:999px;background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .unit-tab{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px 0 5px;border-radius:999px;font-size:13.5px;font-weight:700;color:var(--ink-2);white-space:nowrap;transition:background .15s,color .15s}
 .unit-tab i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--uc);background:color-mix(in srgb,var(--uc) var(--mix),transparent)}
 .unit-tab:hover{color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}
 .unit-tab[aria-current="page"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),inset 0 0 0 1.5px color-mix(in srgb,var(--uc) 50%,transparent)}
 .unit-tab[aria-current="page"] i{background:var(--uc);color:var(--card)}
-.tools{display:flex;align-items:center;gap:2px}
+.soon-chip{font-style:normal;display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:6px;font-size:10.5px;font-weight:800;line-height:1;color:var(--s5);background:color-mix(in srgb,var(--s5) var(--mix),transparent);border:1px dashed color-mix(in srgb,var(--s5) 55%,transparent)}
+.units::-webkit-scrollbar{display:none}
+.units.scroll{justify-self:stretch;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
+.tools{grid-column:3;display:flex;align-items:center;gap:2px}
 .icon-btn{height:40px;min-width:40px;padding:0 10px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:6px;color:var(--ink-2);font-size:14px;font-weight:600;transition:background .15s}
 .icon-btn:hover{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink)}
 .icon-btn svg{width:20px;height:20px}
@@ -251,12 +254,23 @@ main{padding:28px 0 40px}
 .lab.featured h3{font-size:22px}
 .lab.featured p{font-size:15.5px}
 
+/* 준비 중인 단계 */
+.lab.soon{border-style:dashed;border-color:color-mix(in srgb,var(--c) 40%,var(--line))}
+.lab.soon:hover{transform:none;box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--c) 40%,var(--line))}
+.soon-art{margin:12px 0 12px 12px;border-radius:14px;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--c);border:1.5px dashed color-mix(in srgb,var(--c) 40%,transparent);background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 7%,transparent) 0 12px,transparent 12px 24px),color-mix(in srgb,var(--c) 5%,var(--card))}
+.soon-art .ico{width:84px;height:84px}
+.soon-art span{font-size:14px;font-weight:800}
+.lab .soon-sub{margin-top:12px;font-size:13px;font-weight:800;color:var(--c)}
+.topics{list-style:none;margin-top:6px;display:grid;gap:6px}
+.topics li{position:relative;padding-left:18px;font-size:15px;line-height:1.5;color:var(--ink-2)}
+.topics li::before{content:"";position:absolute;left:3px;top:.62em;width:7px;height:7px;border-radius:50%;background:color-mix(in srgb,var(--c) 70%,transparent)}
+
 /* ── 단원 잇기 ─────────────────── */
 .series{margin-top:56px;padding-top:36px;border-top:1px solid var(--line)}
 .series-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;margin-bottom:18px}
 .series-head h2{font-family:'Jua',var(--font);font-weight:400;font-size:clamp(24px,3vw,30px);line-height:1.25}
 .series-head p{font-size:14px;color:var(--ink-3)}
-.unit-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.unit-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .ucard{position:relative;display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:20px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s var(--ease),box-shadow .2s,border-color .2s;min-width:0}
 a.ucard:hover{transform:translateY(-3px);box-shadow:var(--shadow-hi);border-color:color-mix(in srgb,var(--uc) 50%,var(--line))}
 .ucard .uico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:var(--uc);background:color-mix(in srgb,var(--uc) var(--mix),var(--card));border:1.5px solid color-mix(in srgb,var(--uc) 35%,transparent)}
@@ -268,6 +282,9 @@ a.ucard:hover{transform:translateY(-3px);box-shadow:var(--shadow-hi);border-colo
 .ucard .ufoot svg{width:16px;height:16px;color:var(--uc);transition:transform .2s var(--ease)}
 a.ucard:hover .ufoot svg{transform:translate(2px,-2px)}
 .ucard.here{background:color-mix(in srgb,var(--uc) 7%,var(--card));border:1.5px dashed color-mix(in srgb,var(--uc) 55%,transparent);box-shadow:none}
+.ucard .soon-chip{height:22px;padding:0 8px;font-size:12px}
+.ucard .uf{display:inline-flex;align-items:center;gap:6px}
+.ucard.soon .uico{border-style:dashed}
 .here-badge{position:absolute;right:14px;top:14px;font-size:11.5px;font-weight:800;color:var(--card);background:var(--uc);padding:3px 9px;border-radius:999px}
 
 footer{padding:28px 0 44px;color:var(--ink-3);font-size:13px}
@@ -292,10 +309,8 @@ dialog:not([open]){display:none}
 
 /* ── 반응형 ───────────────────── */
 @media (max-width:1080px){
-  .units{order:3;flex:1 0 100%;margin:0 0 8px;overflow-x:auto;scrollbar-width:none;border-radius:16px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
-  .units::-webkit-scrollbar{display:none}
+  .units{justify-self:stretch;border-radius:16px}
   .unit-tab{flex:1 0 auto;justify-content:center}
-  .tools{margin-left:auto}
 }
 @media (max-width:960px){
   .hero-grid{grid-template-columns:1fr;padding-top:12px;padding-bottom:48px}
@@ -303,6 +318,8 @@ dialog:not([open]){display:none}
   .lab.featured{grid-template-columns:1fr}
   .lab.featured .shot{margin:12px 12px 0}
   .lab.featured .lab-body{padding:16px 20px}
+  .lab.featured .soon-art{margin:12px 12px 0;min-height:150px}
+  .unit-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:720px){
   .grid{grid-template-columns:1fr;gap:18px}
@@ -318,7 +335,6 @@ dialog:not([open]){display:none}
   .cell .ico{width:34px;height:34px}
   .cell-no{display:none}
   .unit-tab{padding:0 10px 0 4px;font-size:13px}
-  .unit-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:520px){
   .unit-cards{grid-template-columns:1fr}
@@ -353,7 +369,7 @@ dialog:not([open]){display:none}
         <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6.2L4.8 18.1A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9.2V3"/><path d="M7.5 15h9"/></svg></span>
         송쌤과학
       </span>
-      <nav class="units" aria-label="중2 과학 단원별 실험 모음"><a class="unit-tab" href="https://songsamscience.github.io/Properties-of-Matter-Experiment-Collection/" style="--uc:var(--u1)"><i>1</i>물질의 특성</a><a class="unit-tab" href="https://songsamscience.github.io/Geosphere-change-experiments-collection/" style="--uc:var(--u2)"><i>2</i>지권의 변화</a><a class="unit-tab" href="https://songsamscience.github.io/Light-and-Wave-Experiments-Collection/" style="--uc:var(--u3)"><i>3</i>빛과 파동</a><a class="unit-tab" href="https://songsamscience.github.io/Composition-of-Matter-Experiments-Collection/" style="--uc:var(--u4)"><i>4</i>물질의 구성</a><a class="unit-tab" href="https://songsamscience.github.io/Electricity-and-Magnetism-Experiments-Collection/" style="--uc:var(--u7)"><i>7</i>전기와 자기</a><a class="unit-tab" href="#page-title" aria-current="page" style="--uc:var(--u8)"><i>8</i>별과 우주</a></nav>
+      <nav class="units" aria-label="중2 과학 단원별 실험 모음"><a class="unit-tab" href="https://songsamscience.github.io/Properties-of-Matter-Experiment-Collection/" style="--uc:var(--u1)"><i>1</i>물질의 특성</a><a class="unit-tab" href="https://songsamscience.github.io/Geosphere-change-experiments-collection/" style="--uc:var(--u2)"><i>2</i>지권의 변화</a><a class="unit-tab" href="https://songsamscience.github.io/Light-and-Wave-Experiments-Collection/" style="--uc:var(--u3)"><i>3</i>빛과 파동</a><a class="unit-tab" href="https://songsamscience.github.io/Composition-of-Matter-Experiments-Collection/" style="--uc:var(--u4)"><i>4</i>물질의 구성</a><a class="unit-tab" href="https://songsamscience.github.io/Plants-and-Energy-Experiments-Collection/" style="--uc:var(--u5)"><i>5</i>식물과 에너지<em class="soon-chip">준비중</em></a><a class="unit-tab" href="https://songsamscience.github.io/Animals-and-Energy-Experiments-Collection/" style="--uc:var(--u6)"><i>6</i>동물과 에너지<em class="soon-chip">준비중</em></a><a class="unit-tab" href="https://songsamscience.github.io/Electricity-and-Magnetism-Experiments-Collection/" style="--uc:var(--u7)"><i>7</i>전기와 자기</a><a class="unit-tab" href="#page-title" aria-current="page" style="--uc:var(--u8)"><i>8</i>별과 우주</a></nav>
       <div class="tools">
         <a class="icon-btn yt" href="https://www.youtube.com/@songsamscience" target="_blank" rel="noopener" aria-label="송쌤과학 유튜브 (새 창)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z"/><path fill="#fff" d="m9.6 15.6 6.2-3.6-6.2-3.6z"/></svg></a>
         <a class="icon-btn ig" href="https://www.instagram.com/songsamscience/" target="_blank" rel="noopener" aria-label="송쌤과학 인스타그램 (새 창)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -376,9 +392,7 @@ dialog:not([open]){display:none}
         <button class="btn btn-ghost" type="button" id="shareHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 14h3v3h-3zM20.5 14v.01M17 20.5h3.5V17"/></svg>QR로 학생과 공유</button>
       </div>
       <div class="stats">
-        <div><b>5</b>가상실험</div>
-        <div><b>4</b>학습 단계</div>
-        <div><b>9.27</b>최근 업데이트</div>
+        <div><b>5</b>가상실험</div><div><b>4</b>학습 단계</div><div><b>9.27</b>최근 업데이트</div>
       </div>
       <p class="hero-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg>카드를 누르면 실험이 새 창에서 열려요. 설치 없이 브라우저에서 바로 실행되고, 디벗·태블릿에서도 동작합니다.</p>
     </div>
@@ -567,7 +581,7 @@ dialog:not([open]){display:none}
       <h2 id="series-h">중2 과학 실험 모음, 단원별로 이어 보기</h2>
       <p>단원을 고르면 그 단원의 실험 모음으로 이동해요.</p>
     </div>
-    <div class="unit-cards"><a class="ucard" href="https://songsamscience.github.io/Properties-of-Matter-Experiment-Collection/" style="--uc:var(--u1)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><rect x="14" y="27" width="12" height="7.5" fill="currentColor" fill-opacity=".7"/><rect x="14" y="20" width="12" height="7" fill="currentColor" fill-opacity=".38"/><rect x="14" y="14" width="12" height="6" fill="currentColor" fill-opacity=".16"/><path d="M11 5h18M13 5v28a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="20" cy="20" r="2.6" fill="currentColor"/></svg></span><span class="utext"><small>1단원</small><b>물질의 특성</b></span><p>끓는점·밀도·용해도로 물질을 구별하고, 그 차이로 혼합물을 분리해요.</p><span class="ufoot">가상실험 10개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Geosphere-change-experiments-collection/" style="--uc:var(--u2)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" fill="currentColor"><circle cx="20" cy="20" r="16" fill-opacity=".1"/><circle cx="20" cy="20" r="11.5" fill-opacity=".18"/><circle cx="20" cy="20" r="6.8" fill-opacity=".35"/><circle cx="20" cy="20" r="3" fill-opacity=".85"/></g><path d="M20 20 32 9" stroke="var(--card)" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="utext"><small>2단원</small><b>지권의 변화</b></span><p>지구계에서 지구 내부, 광물과 암석, 토양과 대륙 이동까지 따라가요.</p><span class="ufoot">가상실험 6개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Light-and-Wave-Experiments-Collection/" style="--uc:var(--u3)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="14" r="9" fill-opacity=".22"/><circle cx="14.5" cy="24" r="9" fill-opacity=".22"/><circle cx="25.5" cy="24" r="9" fill-opacity=".22"/></g></svg></span><span class="utext"><small>3단원</small><b>빛과 파동</b></span><p>빛의 반사·굴절과 렌즈, 빛의 합성과 색, 파동과 소리를 다뤄요.</p><span class="ufoot">가상실험 8개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Composition-of-Matter-Experiments-Collection/" style="--uc:var(--u4)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-opacity=".55"/><circle cx="20" cy="20" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-opacity=".55"/><circle cx="20" cy="20" r="3.6" fill="currentColor"/><circle cx="35" cy="20" r="2.4" fill="currentColor"/><circle cx="14" cy="14" r="2.4" fill="currentColor"/><circle cx="9.4" cy="30.6" r="2.4" fill="currentColor"/></svg></span><span class="utext"><small>4단원</small><b>물질의 구성</b></span><p>원소에서 원자, 분자, 이온까지 물질을 이루는 입자를 직접 만들어 봐요.</p><span class="ufoot">가상실험 10개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Electricity-and-Magnetism-Experiments-Collection/" style="--uc:var(--u7)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><path d="M23 4 9 22h9.5L16 36l15-19.5h-9.5z" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span class="utext"><small>7단원</small><b>전기와 자기</b></span><p>마찰 전기와 정전기 유도, 전류와 옴의 법칙, 소비 전력, 전류의 자기 작용을 다뤄요.</p><span class="ufoot">가상실험 7개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><div class="ucard here" style="--uc:var(--u8)" aria-current="page"><span class="here-badge">지금 보는 단원</span><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 6.5 23.6 16.5 34.3 16.9 25.9 23.4 28.8 33.6 20 27.7 11.2 33.6 14.1 23.4 5.7 16.9 16.4 16.5Z" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M33 3.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="currentColor"/></svg></span><span class="utext"><small>8단원</small><b>별과 우주</b></span><p>연주 시차와 별의 밝기·색으로 별을 알아보고, 우리 은하와 팽창하는 우주까지 나아가요.</p><span class="ufoot">가상실험 5개</span></div></div>
+    <div class="unit-cards"><a class="ucard" href="https://songsamscience.github.io/Properties-of-Matter-Experiment-Collection/" style="--uc:var(--u1)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><rect x="14" y="27" width="12" height="7.5" fill="currentColor" fill-opacity=".7"/><rect x="14" y="20" width="12" height="7" fill="currentColor" fill-opacity=".38"/><rect x="14" y="14" width="12" height="6" fill="currentColor" fill-opacity=".16"/><path d="M11 5h18M13 5v28a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="20" cy="20" r="2.6" fill="currentColor"/></svg></span><span class="utext"><small>1단원</small><b>물질의 특성</b></span><p>끓는점·밀도·용해도로 물질을 구별하고, 그 차이로 혼합물을 분리해요.</p><span class="ufoot">가상실험 10개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Geosphere-change-experiments-collection/" style="--uc:var(--u2)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" fill="currentColor"><circle cx="20" cy="20" r="16" fill-opacity=".1"/><circle cx="20" cy="20" r="11.5" fill-opacity=".18"/><circle cx="20" cy="20" r="6.8" fill-opacity=".35"/><circle cx="20" cy="20" r="3" fill-opacity=".85"/></g><path d="M20 20 32 9" stroke="var(--card)" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="utext"><small>2단원</small><b>지권의 변화</b></span><p>지구계에서 지구 내부, 광물과 암석, 토양과 대륙 이동까지 따라가요.</p><span class="ufoot">가상실험 6개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Light-and-Wave-Experiments-Collection/" style="--uc:var(--u3)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="14" r="9" fill-opacity=".22"/><circle cx="14.5" cy="24" r="9" fill-opacity=".22"/><circle cx="25.5" cy="24" r="9" fill-opacity=".22"/></g></svg></span><span class="utext"><small>3단원</small><b>빛과 파동</b></span><p>빛의 반사·굴절과 렌즈, 빛의 합성과 색, 파동과 소리를 다뤄요.</p><span class="ufoot">가상실험 8개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Composition-of-Matter-Experiments-Collection/" style="--uc:var(--u4)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-opacity=".55"/><circle cx="20" cy="20" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-opacity=".55"/><circle cx="20" cy="20" r="3.6" fill="currentColor"/><circle cx="35" cy="20" r="2.4" fill="currentColor"/><circle cx="14" cy="14" r="2.4" fill="currentColor"/><circle cx="9.4" cy="30.6" r="2.4" fill="currentColor"/></svg></span><span class="utext"><small>4단원</small><b>물질의 구성</b></span><p>원소에서 원자, 분자, 이온까지 물질을 이루는 입자를 직접 만들어 봐요.</p><span class="ufoot">가상실험 10개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard soon" href="https://songsamscience.github.io/Plants-and-Energy-Experiments-Collection/" style="--uc:var(--u5)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><path d="M9 31C8.5 17 17 7.5 33.5 6.5 33 22 24 31.5 9 31z" fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 35 27 13M14 26h7M18.5 21.5h6M18.5 21.5v-6M14 26v-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="utext"><small>5단원</small><b>식물과 에너지</b></span><p>빛에너지로 양분을 만드는 광합성, 식물의 호흡, 양분의 저장과 이동을 다뤄요.</p><span class="ufoot"><span class="uf">가상실험 <em class="soon-chip">준비중</em></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard soon" href="https://songsamscience.github.io/Animals-and-Energy-Experiments-Collection/" style="--uc:var(--u6)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34S6 25.5 6 15.5A7.2 7.2 0 0 1 20 11a7.2 7.2 0 0 1 14 4.5C34 25.5 20 34 20 34z" fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 20.5H15l2-4.5 3.2 8.5 2.6-6 1.4 2H31.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="utext"><small>6단원</small><b>동물과 에너지</b></span><p>소화·순환·호흡·배설 기관계가 함께 일하며 세포가 에너지를 얻는 과정을 따라가요.</p><span class="ufoot"><span class="uf">가상실험 <em class="soon-chip">준비중</em></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><a class="ucard" href="https://songsamscience.github.io/Electricity-and-Magnetism-Experiments-Collection/" style="--uc:var(--u7)"><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><path d="M23 4 9 22h9.5L16 36l15-19.5h-9.5z" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span class="utext"><small>7단원</small><b>전기와 자기</b></span><p>마찰 전기와 정전기 유도, 전류와 옴의 법칙, 소비 전력, 전류의 자기 작용을 다뤄요.</p><span class="ufoot">가상실험 7개 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a><div class="ucard here" style="--uc:var(--u8)" aria-current="page"><span class="here-badge">지금 보는 단원</span><span class="uico"><svg class="" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 6.5 23.6 16.5 34.3 16.9 25.9 23.4 28.8 33.6 20 27.7 11.2 33.6 14.1 23.4 5.7 16.9 16.4 16.5Z" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M33 3.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="currentColor"/></svg></span><span class="utext"><small>8단원</small><b>별과 우주</b></span><p>연주 시차와 별의 밝기·색으로 별을 알아보고, 우리 은하와 팽창하는 우주까지 나아가요.</p><span class="ufoot">가상실험 5개</span></div></div>
   </section>
 </main>
 
@@ -663,8 +677,14 @@ dialog:not([open]){display:none}
   });
 
   /* 좁은 화면: 지금 단원 탭이 보이도록 */
-  var curTab = document.querySelector('.unit-tab[aria-current]');
-  if (curTab && curTab.parentNode.scrollWidth > curTab.parentNode.clientWidth) curTab.parentNode.scrollLeft = curTab.offsetLeft - 8;
+  var units = document.querySelector('.units'), curTab = document.querySelector('.unit-tab[aria-current]');
+  function fitUnits(){
+    units.classList.remove('scroll');
+    units.classList.toggle('scroll', units.scrollWidth > units.clientWidth + 1);
+  }
+  fitUnits();
+  addEventListener('resize', fitUnits);
+  if (curTab && units.scrollWidth > units.clientWidth) units.scrollLeft = curTab.offsetLeft - 8;
 
   /* 지금 보고 있는 단계 표시 */
   var steps = {};
