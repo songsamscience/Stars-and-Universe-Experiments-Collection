@@ -83,6 +83,7 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 img,svg{display:block}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wrap{max-width:var(--page);margin:0 auto;padding:0 var(--gut)}
 
@@ -386,13 +387,13 @@ dialog:not([open]){display:none}
       <span class="eyebrow">2022 개정 교육과정 · 중학교 2학년 과학</span>
       <h1 id="page-title"><span class="unit">8단원</span><span class="accent">별과 우주</span></h1>
       <p class="brandline">송쌤과학 가상실험 모음</p>
-      <p class="hero-sub">관측하는 자리를 옮겨 보는 시차에서 출발해 별까지의 거리, 별의 밝기와 색, 우리 은하의 구조, 팽창하는 우주까지. 수업 순서대로 모은 5개의 가상실험입니다.</p><p class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>이 단원의 실험은 지금 만들고 있어요. 완성되는 대로 화면과 내용이 바뀔 수 있어요.</p>
+      <p class="hero-sub">관측하는 자리를 옮겨 보는 시차에서 출발해 별까지의 거리, 별의 밝기와 색, 우리 은하의 구조, 팽창하는 우주까지. 수업 순서대로 모은 5개의 가상실험입니다.</p><p class="notice" id="wipNotice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>이 단원의 실험은 지금 만들고 있어요. 완성되는 대로 화면과 내용이 바뀔 수 있어요.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#distance">첫 실험부터 시작 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         <button class="btn btn-ghost" type="button" id="shareHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 14h3v3h-3zM20.5 14v.01M17 20.5h3.5V17"/></svg>QR로 학생과 공유</button>
       </div>
       <div class="stats">
-        <div><b>5</b>가상실험</div><div><b>4</b>학습 단계</div><div><b>9.27</b>최근 업데이트</div>
+        <div><b>5</b>가상실험</div><div><b>4</b>학습 단계</div><div><b id="latestDate">9.27</b>최근 업데이트</div>
       </div>
       <p class="hero-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg>카드를 누르면 실험이 새 창에서 열려요. 설치 없이 브라우저에서 바로 실행되고, 디벗·태블릿에서도 동작합니다.</p>
     </div>
@@ -617,11 +618,77 @@ dialog:not([open]){display:none}
   });
 
   /* 최근 30일 안에 공개한 실험에 NEW */
-  var now = Date.now();
-  document.querySelectorAll('.lab').forEach(function(el){
-    var t = Date.parse(el.dataset.date + 'T00:00:00+09:00');
-    if (now - t >= 0 && now - t <= 30 * 864e5) el.querySelector('.flag.new').hidden = false;
-  });
+  var labs = [].slice.call(document.querySelectorAll('.lab[data-url]'));
+  function markNew(){
+    var now = Date.now();
+    labs.forEach(function(el){
+      var t = Date.parse(el.dataset.date + 'T00:00:00+09:00');
+      el.querySelector('.flag.new').hidden = !(now - t >= 0 && now - t <= 30 * 864e5);
+    });
+  }
+  markNew();
+
+  /* 시트 연동: 실험 목록 구글 시트의 실험명에 「제작중」이 있으면 제작중 표시, 편집일은 공개일.
+     못 읽으면 빌드할 때 넣은 값 그대로 둔다. */
+  function parseCSV(t){
+    var rows = [], row = [], f = '', q = false, i, c;
+    for (i = 0; i < t.length; i++){
+      c = t[i];
+      if (q){ if (c === '"'){ if (t[i+1] === '"'){ f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"') q = true;
+      else if (c === ','){ row.push(f); f = ''; }
+      else if (c === '\n' || c === '\r'){ if (c === '\r' && t[i+1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+      else f += c;
+    }
+    if (f || row.length){ row.push(f); rows.push(row); }
+    return rows;
+  }
+  function pad(n){ return (n < 10 ? '0' : '') + +n; }
+  function sheetMap(text){
+    var map = {}, n = 0;
+    parseCSV(text).slice(1).forEach(function(r){
+      var m = /github\.io\/([^\/?#\s]+)/.exec(r[3] || '');
+      if (!m) return;
+      var d = /(\d{4})\D+(\d{1,2})\D+(\d{1,2})/.exec(r[4] || '');
+      map[m[1].toLowerCase()] = { wip: /제작\s*중/.test(r[2] || ''), date: d ? d[1] + '-' + pad(d[2]) + '-' + pad(d[3]) : '' };
+      n++;
+    });
+    return n ? map : null;
+  }
+  function applySheet(map){
+    labs.forEach(function(el){
+      var r = map[el.dataset.url.split('/')[3].toLowerCase()];
+      if (!r) return;
+      var wip = el.querySelector('.flag.wip');
+      if (r.wip && !wip){
+        wip = document.createElement('span'); wip.className = 'flag wip'; wip.textContent = '제작중';
+        el.querySelector('.kind').after(wip);
+      } else if (!r.wip && wip) wip.remove();
+      if (r.date){
+        el.dataset.date = r.date;
+        el.querySelector('.date').textContent = +r.date.slice(0, 4) + '.' + +r.date.slice(5, 7) + '.' + +r.date.slice(8, 10) + '. 공개';
+      }
+    });
+    markNew();
+    var note = document.getElementById('wipNotice');
+    if (note) note.hidden = !document.querySelector('.lab .flag.wip');
+    var latest = document.getElementById('latestDate');
+    if (latest){
+      var max = labs.reduce(function(a, el){ return el.dataset.date > a ? el.dataset.date : a; }, '');
+      latest.textContent = +max.slice(5, 7) + '.' + +max.slice(8, 10);
+    }
+  }
+  function loadSheet(urls){
+    if (!urls.length || !window.fetch) return;
+    var ctl = window.AbortController ? new AbortController() : null;
+    var tm = ctl && setTimeout(function(){ ctl.abort(); }, 8000);
+    fetch(urls[0], { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+      .then(function(res){ if (!res.ok) throw new Error(res.status); return res.text(); })
+      .then(function(text){ var map = sheetMap(text); if (!map) throw new Error('empty'); clearTimeout(tm); applySheet(map); })
+      .catch(function(){ clearTimeout(tm); loadSheet(urls.slice(1)); });
+  }
+  var SHEET = 'https://docs.google.com/spreadsheets/d/1QVuEU-SQoX_kEvTFFNW0c2B90sMOy5M5n-QU0SjRMiU/';
+  if (labs.length) loadSheet([SHEET + 'export?format=csv&gid=0', SHEET + 'gviz/tq?tqx=out:csv&gid=0']);
 
   /* 알림 */
   var toast = document.getElementById('toast'), tt;
