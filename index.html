@@ -188,7 +188,7 @@ h1 .accent{background:linear-gradient(transparent 58%,var(--hl) 58%, var(--hl) 9
 .path{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
 .path .wrap{display:flex;align-items:center;gap:14px;height:68px}
 .path-label{font-size:13px;font-weight:800;color:var(--ink-3);white-space:nowrap}
-.steps{display:flex;gap:22px;flex:1;overflow-x:auto;scrollbar-width:none;padding:2px}
+.steps{position:relative;display:flex;gap:22px;flex:1;overflow-x:auto;scrollbar-width:none;padding:2px}
 .steps::-webkit-scrollbar{display:none}
 .step{position:relative;display:flex;align-items:center;gap:8px;height:46px;padding:0 14px 0 8px;border-radius:14px;color:var(--ink-2);white-space:nowrap;transition:background .15s,color .15s;flex:0 0 auto}
 .step:hover{background:color-mix(in srgb,var(--c) 9%,transparent);color:var(--ink)}
@@ -243,9 +243,9 @@ main{padding:28px 0 40px}
 .stretch:focus-visible{outline:none}
 .lab:has(.stretch:focus-visible){outline:3px solid var(--blue);outline-offset:3px}
 .lab p{margin-top:6px;color:var(--ink-2);font-size:14.5px;line-height:1.6}
-.lab-foot{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:14px}
+.lab-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto;padding-top:14px}
 .date{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-right:auto;white-space:nowrap}
-.actions{display:flex;align-items:center;gap:4px}
+.actions{display:flex;align-items:center;gap:4px;margin-left:auto}
 .mini{position:relative;z-index:2;height:36px;padding:0 10px;border-radius:10px;display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--ink-2);transition:background .15s,color .15s}
 .mini svg{width:16px;height:16px}
 .mini:hover{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink)}
@@ -352,7 +352,7 @@ dialog:not([open]){display:none}
 }
 @media (max-width:420px){
   .art{max-width:250px}
-  .float-tile{transform:scale(.82)}
+  .float-tile{scale:.82}
   .ft1{left:-4%} .ft3{right:-6%}
   .lab-body{padding:14px 16px}
   .shot{margin:10px 10px 0}
